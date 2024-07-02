@@ -1,1 +1,2 @@
-# kNN
+#kNN 
+这是我第一个repositories，我会将kNN的Python和R语言实现代码写上来
