@@ -15,7 +15,7 @@ test_data_labels = test_data['Diagnosis']
 label_map = {'Malignant': 0, 'Benign': 1}
 train_data_labels = train_data_labels.map(label_map)
 test_data_labels = test_data_labels.map(label_map)
-
+test_data_labels_reset = test_data_labels.reset_index(drop=True)
 #标准化数据集
 def standardization(x):
     return (x - x.min()) / (x.max() - x.min())
@@ -54,11 +54,10 @@ k = 21
 
 pre = knn(train, train_data_labels, test, k)
 # 将预测结果映射回原始标签
-reverse_label_map = {0: 'Malignant', 1: 'Benign'}
-pre['Diagnosis'] = pre['Diagnosis'].map(reverse_label_map)
+#reverse_label_map = {0: 'Malignant', 1: 'Benign'}
+#pre['Diagnosis'] = pre['Diagnosis'].map(reverse_label_map)
 
 print(pre)
 # 计算准确率
-#accuracy = (pre['Diagnosis'] == test_data['Diagnosis']).mean()
-#print(f"准确率: {accuracy}")
-
+accuracy = (pre['Diagnosis'] == test_data_labels_reset).mean()
+print(f"准确率: {accuracy}")
